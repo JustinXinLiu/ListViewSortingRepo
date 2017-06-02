@@ -1,30 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace ListViewSortingRepo
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<Item> Items { get; } = new ObservableCollection<Item>();
+
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
+            Loaded += OnLoaded;
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new Item(1));
+            Items.Add(new Item(3));
+            Items.Add(new Item(2));
+            Items.Add(new Item(4));
+            Items.Add(new Item(5));
+            Items.Add(new Item(8));
+            Items.Add(new Item(7));
+            Items.Add(new Item(6));
+            Items.Add(new Item(13));
+            Items.Add(new Item(12));
+            Items.Add(new Item(11));
+            Items.Add(new Item(10));
+            Items.Add(new Item(9));
+            Items.Add(new Item(14));
+            Items.Add(new Item(15));
+            Items.Add(new Item(17));
+            Items.Add(new Item(16));
+            Items.Add(new Item(18));
+            Items.Add(new Item(19));
+            Items.Add(new Item(20));
+        }
+
+        private void OnSortClick(object sender, RoutedEventArgs e) =>
+            Items.Sort(i => i.Id);
     }
 }

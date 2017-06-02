@@ -1,13 +1,50 @@
-﻿<Page
-    x:Class="ListViewSortingRepo.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ListViewSortingRepo"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+﻿<Page x:Class="ListViewSortingRepo.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:ListViewSortingRepo"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListView"
+                  ItemsSource="{x:Bind Items}"
+                  Margin="0,6">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepScrollOffset" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
 
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Item">
+                    <Border Margin="0,6"
+                            Padding="8"
+                            Background="AntiqueWhite">
+                        <TextBlock Text="{x:Bind Id}"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="Coral" />
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button x:Name="Sort"
+                Content="Sort the list"
+                Grid.Row="1"
+                Margin="24"
+                HorizontalAlignment="Center"
+                Click="OnSortClick" />
     </Grid>
 </Page>
